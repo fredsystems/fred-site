@@ -16,17 +16,16 @@ export function ProjectCard({ project }: ProjectCardProps): React.JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.projectCard__nameLink}
-            aria-label={`${project.name} (opens in new tab)`}
+            aria-label={`${project.name}${project.description ? ` — ${project.description}` : ""} (opens in new tab)`}
           >
             {project.name}
+            {project.description && (
+              <span className={styles.projectCard__description}>{` — ${project.description}`}</span>
+            )}
             <IconExternalLink className={styles.projectCard__externalIcon} aria-hidden="true" />
           </a>
         </h3>
       </div>
-
-      {project.description && (
-        <p className={styles.projectCard__description}>{project.description}</p>
-      )}
 
       <div className={styles.projectCard__meta}>
         {project.language && (

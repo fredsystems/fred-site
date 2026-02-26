@@ -17,8 +17,24 @@
 .projectCard {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
   gap: $space-sm;
+  padding: $space-md;
+
+  background-color: var(--color-surface0);
+  border: 1px solid var(--color-overlay0);
+  border-radius: #{$radius-md};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface0));
+  }
 }
 
 // ─── Header row ───────────────────────────────────────────────────────────────
@@ -73,23 +89,12 @@
   opacity: 0.6;
 }
 
-// ─── Description ─────────────────────────────────────────────────────────────
+// ─── Description (inline in name line) ───────────────────────────────────────
 
 .projectCard__description {
   font-size: 0.875rem;
-  color: var(--color-subtext1);
-  line-height: 1.5;
-  margin: 0;
-
-  // Clamp long descriptions to 3 lines — keeps the grid visually uniform
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-
-  // Grow to fill available space so the meta + link rows always sit at the
-  // bottom of the card regardless of description length
-  flex: 1;
+  font-weight: 400;
+  color: var(--color-subtext0);
 }
 
 // ─── Meta row (language + stars + GitHub link) ────────────────────────────────
@@ -99,7 +104,6 @@
   align-items: center;
   flex-wrap: wrap;
   gap: $space-sm;
-  margin-top: auto;
 }
 
 // ─── Shared icon size within meta row ────────────────────────────────────────
@@ -153,9 +157,7 @@
   color: var(--color-subtext1);
   text-decoration: none;
   border-radius: #{$radius-sm};
-  // Touch target — padding ensures the clickable area is large enough
-  min-height: 44px;
-  padding: 0 $space-xs;
+  padding: $space-xs;
 
   @media (prefers-reduced-motion: no-preference) {
     transition: color 0.15s ease;

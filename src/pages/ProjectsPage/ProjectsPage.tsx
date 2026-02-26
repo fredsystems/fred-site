@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Button } from "../../components/Button/Button";
 import { Card } from "../../components/Card/Card";
 import { IconExternalLink, IconGitHub } from "../../components/icons";
@@ -7,6 +7,8 @@ import { ProjectCard } from "../../components/ProjectCard/ProjectCard";
 import type { GitHubRepo, ProjectData } from "../../types";
 import { processRepos } from "../../utils/normalizeRepo";
 import styles from "./ProjectsPage.module.scss";
+
+const EXCLUDED_REPOS = new Set([".github", "zabbid"]);
 
 const FREDSYSTEMS_API_URL =
   "https://api.github.com/orgs/fredsystems/repos?sort=updated&per_page=100";
@@ -76,6 +78,11 @@ export function ProjectsPage(): React.JSX.Element {
     fetchRepos();
   }, [fetchRepos]);
 
+  const visibleProjects = useMemo(
+    () => (state.status === "success" ? state.data.filter((p) => !EXCLUDED_REPOS.has(p.name)) : []),
+    [state],
+  );
+
   return (
     <main className={styles.page}>
       <header className={styles.page__header}>
@@ -144,7 +151,7 @@ export function ProjectsPage(): React.JSX.Element {
           </div>
         ) : (
           <ul className={styles.projectGrid} aria-label="FredSystems projects">
-            {state.data.map((project) => (
+            {visibleProjects.map((project) => (
               <li key={project.id}>
                 <ProjectCard project={project} />
               </li>

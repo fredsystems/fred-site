@@ -81,8 +81,10 @@ export function HomePage(): React.JSX.Element {
               aria-label="FredSystems GitHub organization (opens in new tab)"
             >
               <IconGitHub className={styles.links__icon} aria-hidden="true" />
-              <span className={styles.links__label}>FredSystems</span>
-              <span className={styles.links__sublabel}>github.com/fredsystems</span>
+              <span className={styles.links__text}>
+                <span className={styles.links__label}>FredSystems</span>
+                <span className={styles.links__sublabel}>github.com/fredsystems</span>
+              </span>
               <IconExternalLink className={styles.links__externalIcon} aria-hidden="true" />
             </a>
           </li>
@@ -95,8 +97,10 @@ export function HomePage(): React.JSX.Element {
               aria-label="ACARS Hub project on GitHub (opens in new tab)"
             >
               <IconGitHub className={styles.links__icon} aria-hidden="true" />
-              <span className={styles.links__label}>ACARS Hub</span>
-              <span className={styles.links__sublabel}>sdr-enthusiasts/docker-acarshub</span>
+              <span className={styles.links__text}>
+                <span className={styles.links__label}>ACARS Hub</span>
+                <span className={styles.links__sublabel}>sdr-enthusiasts/docker-acarshub</span>
+              </span>
               <IconExternalLink className={styles.links__externalIcon} aria-hidden="true" />
             </a>
           </li>
@@ -109,8 +113,10 @@ export function HomePage(): React.JSX.Element {
               aria-label="SDR-Enthusiasts GitHub organization (opens in new tab)"
             >
               <IconGitHub className={styles.links__icon} aria-hidden="true" />
-              <span className={styles.links__label}>SDR-Enthusiasts</span>
-              <span className={styles.links__sublabel}>github.com/sdr-enthusiasts</span>
+              <span className={styles.links__text}>
+                <span className={styles.links__label}>SDR-Enthusiasts</span>
+                <span className={styles.links__sublabel}>github.com/sdr-enthusiasts</span>
+              </span>
               <IconExternalLink className={styles.links__externalIcon} aria-hidden="true" />
             </a>
           </li>
@@ -123,8 +129,10 @@ export function HomePage(): React.JSX.Element {
               aria-label="NixOS configuration on GitHub (opens in new tab)"
             >
               <IconNixOS className={styles.links__icon} aria-hidden="true" />
-              <span className={styles.links__label}>NixOS Config</span>
-              <span className={styles.links__sublabel}>fredsystems/nixos</span>
+              <span className={styles.links__text}>
+                <span className={styles.links__label}>NixOS Config</span>
+                <span className={styles.links__sublabel}>fredsystems/nixos</span>
+              </span>
               <IconExternalLink className={styles.links__externalIcon} aria-hidden="true" />
             </a>
           </li>
@@ -137,8 +145,10 @@ export function HomePage(): React.JSX.Element {
               aria-label="Personal GitHub profile (opens in new tab)"
             >
               <IconGitHub className={styles.links__icon} aria-hidden="true" />
-              <span className={styles.links__label}>GitHub</span>
-              <span className={styles.links__sublabel}>fredclausen</span>
+              <span className={styles.links__text}>
+                <span className={styles.links__label}>GitHub</span>
+                <span className={styles.links__sublabel}>fredclausen</span>
+              </span>
               <IconExternalLink className={styles.links__externalIcon} aria-hidden="true" />
             </a>
           </li>

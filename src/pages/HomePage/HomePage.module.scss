@@ -15,7 +15,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: $space-2xl;
+  gap: $space-lg;
   max-width: 720px;
   margin: 0 auto;
   padding: $space-xl 0;
@@ -29,7 +29,7 @@
   align-items: center;
   text-align: center;
   gap: $space-sm;
-  padding: $space-xl 0;
+  padding: $space-md 0 0;
 }
 
 .page__title {
@@ -113,24 +113,34 @@
 }
 
 .links__list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: $space-sm;
   list-style: none;
   padding: 0;
   margin: 0;
+
+  // Make each li a flex container so the anchor stretches to fill the cell height
+  > li {
+    display: flex;
+  }
+
+  @media (min-width: #{$bp-tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 // ─── Individual link item ─────────────────────────────────────────────────────
 
 .links__item {
-  display: inline-flex;
+  display: flex;
+  flex: 1;
   align-items: center;
   gap: $space-sm;
 
   // Touch target — WCAG 2.1 AA 44×44px minimum
   min-height: 44px;
-  padding: 0 $space-md;
+  padding: $space-sm $space-md;
 
   font-size: 0.9375rem;
   font-weight: 500;
@@ -168,6 +178,16 @@
   flex-shrink: 0;
 }
 
+// ─── Text wrapper (label + sublabel stacked) ──────────────────────────────────
+
+.links__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  flex: 1;
+  min-width: 0; // prevent long sublabels from overflowing the card
+}
+
 .links__label {
   font-weight: 600;
   color: var(--color-text);
@@ -176,13 +196,15 @@
 .links__sublabel {
   font-size: 0.8125rem;
   color: var(--color-subtext0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .links__externalIcon {
   height: 0.75em;
   flex-shrink: 0;
   opacity: 0.5;
-  margin-left: auto;
 }
 
 // ─── NixOS accent variant ─────────────────────────────────────────────────────

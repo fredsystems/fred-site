@@ -57,6 +57,7 @@
 .page__content {
   display: flex;
   flex-direction: column;
+  gap: $space-md;
 }
 
 .page__loading {
@@ -123,6 +124,11 @@
   flex-direction: column;
   gap: $space-sm;
 
+  // Make each li a flex container so the card inside stretches to fill row height
+  > li {
+    display: flex;
+  }
+
   @media (min-width: #{$bp-tablet}) {
     flex-direction: row;
   }
@@ -138,7 +144,7 @@
   border: 1px solid var(--color-overlay0);
   border-radius: #{$radius-md};
   text-decoration: none;
-  color: inherit;
+  color: var(--color-subtext1);
 
   @media (min-width: #{$bp-tablet}) {
     flex: 1;
@@ -146,13 +152,16 @@
 
   @media (prefers-reduced-motion: no-preference) {
     transition:
+      color 0.15s ease,
       border-color 0.15s ease,
       background-color 0.15s ease;
   }
 
   &:hover {
+    color: var(--color-primary);
     border-color: var(--color-primary);
-    background-color: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface0));
+    background-color: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface0));
+    text-decoration: none;
   }
 
   &:focus-visible {
@@ -223,7 +232,6 @@
   font-size: 0.9375rem;
   color: var(--color-subtext0);
   line-height: 1.5;
-  margin-top: -$space-sm;
 }
 
 // ─── Project grid ─────────────────────────────────────────────────────────────
@@ -251,10 +259,13 @@
   }
 }
 
-// Each list item stretches to fill its grid cell so the card inside it
-// can grow to match sibling cards in the same row.
-.projectGrid__item {
+// Each list item is a column flex container so the card's flex:1 fills the
+// full row height, giving all cards in the same grid row equal height.
+// Note: li elements are targeted directly because the TSX does not apply
+// a projectGrid__item class — this keeps the fix co-located with the grid.
+.projectGrid > li {
   display: flex;
+  flex-direction: column;
 }
 
 // ─── Empty state ──────────────────────────────────────────────────────────────
