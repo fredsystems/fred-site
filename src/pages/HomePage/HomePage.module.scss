@@ -1,0 +1,170 @@
+// HomePage — personal landing page.
+//
+// Layout (mobile-first, single column → wider on larger screens):
+//   - Page header: name (h1) + tagline
+//   - Bio section: prose block with about me text
+//   - Links section: social profile links as pill-shaped buttons
+//
+// The page has generous vertical spacing so the opening feels spacious on all
+// screen sizes without relying on a full-viewport hero image.
+
+@use "../../styles/variables" as *;
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2xl;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: $space-xl 0;
+}
+
+// ─── Page header (name + tagline) ─────────────────────────────────────────────
+
+.page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $space-sm;
+  padding: $space-xl 0;
+}
+
+.page__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+
+  @media (min-width: #{$bp-tablet}) {
+    font-size: 2.75rem;
+  }
+}
+
+.page__tagline {
+  font-size: 1.125rem;
+  color: var(--color-accent-mauve);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+// ─── Bio section ─────────────────────────────────────────────────────────────
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.bio__heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding-bottom: $space-sm;
+  border-bottom: 1px solid var(--color-overlay0);
+}
+
+.bio__content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.bio__text {
+  font-size: 1rem;
+  color: var(--color-subtext1);
+  line-height: 1.75;
+  max-width: 65ch;
+}
+
+// ─── Links section ────────────────────────────────────────────────────────────
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.links__heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding-bottom: $space-sm;
+  border-bottom: 1px solid var(--color-overlay0);
+}
+
+.links__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-sm;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// ─── Individual link item ─────────────────────────────────────────────────────
+
+.links__item {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+
+  // Touch target — WCAG 2.1 AA 44×44px minimum
+  min-height: 44px;
+  padding: 0 $space-md;
+
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-subtext1);
+  text-decoration: none;
+
+  background-color: var(--color-surface0);
+  border: 1px solid var(--color-overlay0);
+  border-radius: #{$radius-md};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface0));
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ─── Link sub-elements ────────────────────────────────────────────────────────
+
+.links__icon {
+  height: 1.25em;
+  flex-shrink: 0;
+}
+
+.links__label {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.links__sublabel {
+  font-size: 0.8125rem;
+  color: var(--color-subtext0);
+}
+
+.links__externalIcon {
+  height: 0.75em;
+  flex-shrink: 0;
+  opacity: 0.5;
+  margin-left: auto;
+}

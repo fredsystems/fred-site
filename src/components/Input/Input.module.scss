@@ -1,0 +1,108 @@
+// Input — labelled text field with optional help text and error state.
+//
+// Design decisions:
+//   - Label is always visible above the input (never a placeholder-as-label pattern)
+//     because placeholder text disappears on focus and is inaccessible to screen readers
+//     as a persistent label.
+//   - Error state uses --color-danger border + role="alert" text so both sighted users
+//     and screen reader users receive the error message.
+//   - focus-visible ring matches the global link/button focus style for consistency.
+//   - min-height 44px on the input satisfies the WCAG 2.1 AA touch target requirement.
+
+@use "../../styles/variables" as *;
+
+// ─── Wrapper ──────────────────────────────────────────────────────────────────
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+  width: 100%;
+}
+
+// ─── Label ────────────────────────────────────────────────────────────────────
+
+.field__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-subtext1);
+  cursor: default;
+}
+
+.field__required {
+  color: var(--color-danger);
+}
+
+// ─── Input element ────────────────────────────────────────────────────────────
+
+.field__input {
+  width: 100%;
+  min-height: 44px; // WCAG 2.1 AA touch target
+  padding: $space-sm $space-md;
+
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-surface0);
+
+  border: 1px solid var(--color-overlay1);
+  border-radius: #{$radius-md};
+  outline: none; // Replaced by explicit :focus-visible ring below
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  &::placeholder {
+    color: var(--color-subtext0);
+  }
+
+  &:hover:not(:disabled):not(:focus) {
+    border-color: var(--color-overlay2);
+  }
+
+  &:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-surface1);
+  }
+}
+
+// ─── Error modifier on the input ──────────────────────────────────────────────
+//
+// Applied when an error message is present. Red border on the control matches
+// the standard visual pattern users expect from form validation.
+
+.field__input--error {
+  border-color: var(--color-danger);
+
+  &:focus-visible {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-danger) 30%, transparent);
+  }
+}
+
+// ─── Help text ────────────────────────────────────────────────────────────────
+
+.field__help {
+  font-size: 0.8125rem;
+  color: var(--color-subtext0);
+  line-height: 1.4;
+}
+
+// ─── Error message ────────────────────────────────────────────────────────────
+//
+// Rendered with role="alert" in the component so screen readers announce it
+// as soon as it appears, without the user having to navigate to it.
+
+.field__error {
+  font-size: 0.8125rem;
+  color: var(--color-danger);
+  line-height: 1.4;
+}

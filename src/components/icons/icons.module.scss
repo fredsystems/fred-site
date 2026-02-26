@@ -1,0 +1,32 @@
+// Base styles for all vendored SVG icon components.
+//
+// Why 1em height: icons should scale naturally with the surrounding text size.
+// Setting height to 1em and letting width be auto means an icon inside a
+// 1rem body paragraph is 16px tall, and an icon inside a 2rem heading is 32px
+// tall — no extra overrides needed in most cases.
+//
+// Components that need a different size override only the height in their own
+// SCSS module, which keeps icon sizing decisions close to the component that
+// uses the icon.
+
+.icon {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+
+  // Inherits the surrounding text color automatically.
+  // This means icons inside a blue link are blue, inside a red error are red,
+  // etc. — without any explicit color prop on the icon component.
+  fill: currentColor;
+
+  // Optical baseline alignment — without this, inline SVGs sit slightly high
+  // relative to adjacent text on most browsers.
+  vertical-align: -0.125em;
+
+  // Prevent the icon from shrinking inside flex containers
+  flex-shrink: 0;
+
+  // Pointer events disabled — icons are decorative and should never intercept
+  // clicks that belong to their parent button or link
+  pointer-events: none;
+}

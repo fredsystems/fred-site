@@ -1,0 +1,83 @@
+// Footer — site-wide footer bar.
+//
+// Uses --color-crust (the darkest Mocha surface) to sit visually below the
+// --color-base page background, reinforcing the layered depth of the layout:
+//   Nav (--color-mantle) → Content (--color-base) → Footer (--color-crust)
+//
+// The footer is intentionally minimal — just a copyright line and a GitHub link.
+// No heavy layout needed.
+
+@use "../../styles/variables" as *;
+
+// ─── Footer bar ───────────────────────────────────────────────────────────────
+
+.footer {
+  background-color: var(--color-crust);
+  border-top: 1px solid var(--color-overlay0);
+  width: 100%;
+  margin-top: auto; // Push to bottom of the flex column in App
+}
+
+// ─── Inner container ──────────────────────────────────────────────────────────
+
+.footer__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-sm;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: $space-md;
+
+  @media (min-width: #{$bp-tablet}) {
+    padding: $space-md $space-lg;
+  }
+}
+
+// ─── Copyright text ───────────────────────────────────────────────────────────
+
+.footer__copy {
+  font-size: 0.8125rem;
+  color: var(--color-subtext0);
+  line-height: 1.5;
+}
+
+// ─── GitHub link ──────────────────────────────────────────────────────────────
+
+.footer__link {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-xs;
+
+  // Touch target — meets WCAG 2.1 AA 44×44px minimum
+  min-height: 44px;
+  padding: 0 $space-xs;
+
+  font-size: 0.8125rem;
+  color: var(--color-subtext1);
+  text-decoration: none;
+  border-radius: #{$radius-sm};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color 0.15s ease;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ─── Icon within the link ─────────────────────────────────────────────────────
+
+.footer__icon {
+  height: 1.125em;
+  flex-shrink: 0;
+}

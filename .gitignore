@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Environment files — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# Keep the example file (no real values)
+!.env.example
+
+# Nix / direnv
+.direnv/
+.pre-commit-config.yaml
+result
+result-*
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+Thumbs.db
+
+# Vite
+*.local
+
+# TypeScript
+*.tsbuildinfo
+
+# tsc composite project emit artifacts (vite.config.ts, playwright.config.ts)
+vite.config.js
+vite.config.d.ts
+playwright.config.js
+playwright.config.d.ts
+
+# Test output
+coverage/
+playwright-report/
+test-results/

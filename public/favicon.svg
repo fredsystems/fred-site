@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle — Catppuccin Mocha base -->
+  <circle cx="16" cy="16" r="16" fill="#1e1e2e"/>
+  <!-- Letter F — Catppuccin Mocha blue (primary) -->
+  <text
+    x="8"
+    y="23"
+    font-family="ui-sans-serif, system-ui, -apple-system, sans-serif"
+    font-size="20"
+    font-weight="700"
+    fill="#89b4fa"
+  >F</text>
+</svg>

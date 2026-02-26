@@ -1,0 +1,186 @@
+// Typography — font stack, scale, and base text styles.
+//
+// Why a system font stack: this is a personal site where fast load times and
+// native feel matter more than a custom typeface. The stack matches the OS
+// default sans-serif on every major platform (macOS, Windows, Linux, iOS,
+// Android) so there is zero font-loading latency.
+
+@use "variables" as *;
+
+// ─── Font stack ─────────────────────────────────────────────────────────────
+
+$font-sans:
+  ui-sans-serif,
+  system-ui,
+  -apple-system,
+  BlinkMacSystemFont,
+  "Segoe UI",
+  Roboto,
+  "Helvetica Neue",
+  Arial,
+  "Noto Sans",
+  sans-serif,
+  "Apple Color Emoji",
+  "Segoe UI Emoji",
+  "Segoe UI Symbol",
+  "Noto Color Emoji";
+
+$font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+// ─── Base document styles ───────────────────────────────────────────────────
+
+body {
+  font-family: $font-sans;
+  font-size: 1rem; // 16px — never set less than this on body
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-base);
+}
+
+// ─── Heading scale ──────────────────────────────────────────────────────────
+//
+// Sizes follow a modular scale. Weights are intentionally high (700/600) to
+// maintain contrast against the dark Mocha background.
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+h5,
+h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--color-subtext1);
+}
+
+// ─── Body text ──────────────────────────────────────────────────────────────
+
+p {
+  color: var(--color-text);
+  max-width: 70ch; // Optimal reading line length
+}
+
+// ─── Links ──────────────────────────────────────────────────────────────────
+//
+// Global link defaults. Components may override with their own SCSS classes,
+// but these ensure a sensible baseline even in plain HTML contexts.
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-accent-mauve);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: #{$radius-sm};
+  }
+
+  // Visited external links — subtle indicator without breaking the palette
+  &:visited {
+    color: var(--color-accent-lavender);
+  }
+}
+
+// ─── Code ───────────────────────────────────────────────────────────────────
+
+code,
+kbd,
+samp,
+pre {
+  font-family: $font-mono;
+  font-size: 0.875em;
+}
+
+code {
+  background-color: var(--color-surface0);
+  color: var(--color-accent-peach);
+  padding: 0.125em 0.35em;
+  border-radius: #{$radius-sm};
+  border: 1px solid var(--color-overlay0);
+}
+
+pre {
+  background-color: var(--color-surface0);
+  border: 1px solid var(--color-overlay0);
+  border-radius: #{$radius-md};
+  padding: $space-md;
+  overflow-x: auto;
+
+  code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: var(--color-text);
+  }
+}
+
+// ─── Utility text classes ───────────────────────────────────────────────────
+
+.text-secondary {
+  color: var(--color-subtext1);
+  font-size: 0.875rem;
+}
+
+.text-muted {
+  color: var(--color-subtext0);
+  font-size: 0.8125rem;
+}
+
+.text-mono {
+  font-family: $font-mono;
+}
+
+// ─── Responsive typography adjustments ──────────────────────────────────────
+//
+// Shrink headings on very narrow screens so they do not overflow or wrap
+// awkwardly on 320px devices.
+
+@media (max-width: #{$bp-tablet - 1}) {
+  h1 {
+    font-size: 1.625rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+}

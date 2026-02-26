@@ -1,0 +1,107 @@
+// NotFoundPage — 404 not found page.
+//
+// Centered layout with a large error code, a friendly message, and a link
+// back to the home page. Kept intentionally minimal — this page is rarely
+// seen and doesn't need the full page chrome.
+
+@use "../../styles/variables" as *;
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: $space-2xl $space-md;
+  min-height: 60vh;
+}
+
+// ─── Content block ────────────────────────────────────────────────────────────
+
+.page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+  max-width: 480px;
+}
+
+// ─── Error code ───────────────────────────────────────────────────────────────
+//
+// Large decorative "404" — uses accent-mauve so it reads as a visual element
+// rather than a severity indicator (red would suggest a critical error state).
+// aria-hidden is set in the JSX so screen readers skip this and read the
+// heading instead.
+
+.page__code {
+  font-size: clamp(5rem, 20vw, 10rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-accent-mauve);
+  letter-spacing: -0.04em;
+}
+
+// ─── Heading ──────────────────────────────────────────────────────────────────
+
+.page__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  margin: 0;
+
+  @media (min-width: #{$bp-tablet}) {
+    font-size: 1.75rem;
+  }
+}
+
+// ─── Description ─────────────────────────────────────────────────────────────
+
+.page__description {
+  font-size: 0.9375rem;
+  color: var(--color-subtext1);
+  max-width: 40ch;
+  line-height: 1.6;
+  margin: 0;
+}
+
+// ─── Back home link ───────────────────────────────────────────────────────────
+
+.page__homeLink {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-sm;
+
+  // Touch target — WCAG 2.1 AA 44×44px minimum
+  min-height: 44px;
+  padding: 0 $space-lg;
+
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-base);
+  text-decoration: none;
+
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  border-radius: #{$radius-md};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  &:hover {
+    background-color: var(--color-accent-lavender);
+    border-color: var(--color-accent-lavender);
+    color: var(--color-base);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,81 @@
+// LoadingSpinner — animated indicator shown while async data is being fetched.
+//
+// Design decisions:
+//   - Pure CSS animation (no JS) keeps the spinner lightweight and reliable
+//   - prefers-reduced-motion: users who opt out of motion see a pulsing opacity
+//     change instead of rotation — still communicates "loading" without dizzying
+//     movement
+//   - The spinner is sized via em units so it scales naturally in context
+//   - role="status" and aria-label are set in the component, not here
+
+@use "../../styles/variables" as *;
+
+// ─── Keyframes ────────────────────────────────────────────────────────────────
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
+// ─── Wrapper ──────────────────────────────────────────────────────────────────
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-sm;
+  color: var(--color-subtext1);
+  padding: $space-md 0;
+}
+
+// ─── Ring ─────────────────────────────────────────────────────────────────────
+//
+// Rendered as a circle with a partially transparent border. Only one of the
+// four border segments is opaque, giving the "rotating arc" effect. The size
+// is 2em so it scales with whatever font-size the parent establishes.
+
+.spinner__ring {
+  display: inline-block;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  flex-shrink: 0;
+
+  // Three segments transparent, one opaque — creates the arc illusion
+  border: 0.2em solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+  border-top-color: var(--color-primary);
+
+  // Spin — gated on the user's motion preference
+  @media (prefers-reduced-motion: no-preference) {
+    animation: spin 0.75s linear infinite;
+  }
+
+  // Reduced-motion fallback: pulse opacity instead of rotating
+  @media (prefers-reduced-motion: reduce) {
+    animation: pulse 1.5s ease-in-out infinite;
+    border-color: var(--color-primary);
+  }
+}
+
+// ─── Label ────────────────────────────────────────────────────────────────────
+
+.spinner__label {
+  font-size: 0.875rem;
+  color: var(--color-subtext1);
+}

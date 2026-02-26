@@ -1,0 +1,35 @@
+// App layout — the structural shell that wraps Nav, page content, and Footer.
+//
+// The App component renders:
+//   <div class="app">
+//     <Nav />
+//     <main class="app__main">   ← grows to fill available space
+//       <Routes />
+//     </main>
+//     <Footer />
+//   </div>
+//
+// Using flex column on the root ensures the footer is always pushed to the
+// bottom of the viewport, even on short pages.
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app__main {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 2.5rem 2rem;
+  }
+}

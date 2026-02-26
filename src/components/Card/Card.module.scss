@@ -1,0 +1,123 @@
+// Card — primary layout component for grouping related content.
+//
+// The card sits on --color-surface0, one step above the --color-base page
+// background. Variants add a left-border accent using semantic color variables
+// so the palette mapping is contained here rather than spread across consumers.
+
+@use "../../styles/variables" as *;
+
+// ─── Base card ───────────────────────────────────────────────────────────────
+
+.card {
+  background-color: var(--color-surface0);
+  border: 1px solid var(--color-overlay0);
+  border-radius: #{$radius-md};
+  overflow: hidden;
+  transition: border-color 0.15s ease;
+}
+
+// ─── Variant accent borders ───────────────────────────────────────────────────
+//
+// Each variant adds a 3px left border to give a color-coded visual hint.
+// The default variant uses the normal border color with no accent — it signals
+// "neutral content" without visual noise.
+
+.card--default {
+  border-left: 3px solid var(--color-overlay1);
+}
+
+.card--info {
+  border-left: 3px solid var(--color-primary);
+}
+
+.card--success {
+  border-left: 3px solid var(--color-success);
+}
+
+.card--warning {
+  border-left: 3px solid var(--color-warning);
+}
+
+.card--danger {
+  border-left: 3px solid var(--color-danger);
+}
+
+// ─── Padding modifier ─────────────────────────────────────────────────────────
+
+.card--padded {
+  .card__header,
+  .card__body {
+    padding: $space-md;
+
+    @media (min-width: #{$bp-tablet}) {
+      padding: $space-lg;
+    }
+  }
+
+  // Collapse the gap between header and body padding so they don't double up
+  .card__header + .card__body {
+    padding-top: 0;
+  }
+}
+
+// ─── Hoverable modifier ───────────────────────────────────────────────────────
+//
+// Applied to cards that represent a clickable item (e.g. project cards).
+// The transform is subtle — just enough to feel interactive without being
+// distracting. Reduced-motion users get only the border-color change.
+
+.card--hoverable {
+  cursor: pointer;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+
+    @media (prefers-reduced-motion: no-preference) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &:focus-within {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.card__header {
+  border-bottom: 1px solid var(--color-overlay0);
+}
+
+.card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: $space-xs;
+
+  // Remove default h3 margin — the card padding handles spacing
+  &:only-child {
+    margin-bottom: 0;
+  }
+}
+
+.card__subtitle {
+  font-size: 0.875rem;
+  color: var(--color-subtext1);
+  line-height: 1.5;
+}
+
+// ─── Body ─────────────────────────────────────────────────────────────────────
+
+.card__body {
+  color: var(--color-text);
+}

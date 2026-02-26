@@ -1,0 +1,153 @@
+// ProjectsPage — displays a responsive grid of GitHub repository cards.
+//
+// Layout (mobile-first):
+//   - Single column on mobile (320px+)
+//   - Two columns on tablet (768px+)
+//   - Three columns on desktop (1024px+)
+//
+// The grid uses CSS Grid rather than flexbox because we want cards in each
+// row to have equal heights (grid's implicit row tracks handle this), and
+// we want clean column alignment without float hacks.
+
+@use "../../styles/variables" as *;
+
+// ─── Page wrapper ─────────────────────────────────────────────────────────────
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+// ─── Page header ──────────────────────────────────────────────────────────────
+
+.page__header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xs;
+}
+
+.page__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+
+  @media (min-width: #{$bp-tablet}) {
+    font-size: 2rem;
+  }
+}
+
+.page__subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-subtext1);
+  line-height: 1.5;
+}
+
+// ─── Status regions ───────────────────────────────────────────────────────────
+//
+// Loading and error states are centered so they sit naturally in the content
+// area without the grid collapsing awkwardly.
+
+.page__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.page__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-md;
+  padding: $space-2xl 0;
+  text-align: center;
+}
+
+.page__error {
+  max-width: 480px;
+
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+}
+
+.page__errorText {
+  font-size: 0.9375rem;
+  color: var(--color-subtext1);
+  max-width: 50ch;
+}
+
+.page__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-2xl 0;
+  text-align: center;
+  color: var(--color-subtext0);
+}
+
+// Legacy alias kept for compatibility
+.page__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-md;
+  padding: $space-2xl 0;
+  text-align: center;
+}
+
+.page__errorMessage {
+  font-size: 0.9375rem;
+  color: var(--color-subtext1);
+  max-width: 50ch;
+}
+
+// ─── Project grid ─────────────────────────────────────────────────────────────
+//
+// Cards are rendered inside <li> elements. The <ul> itself carries the grid
+// layout so each <li> is a grid cell and the <ProjectCard> inside fills it
+// completely via height: 100%.
+
+.projectGrid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-md;
+  align-items: stretch; // Equal-height rows
+
+  @media (min-width: #{$bp-tablet}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: #{$bp-desktop}) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-lg;
+  }
+}
+
+// Each list item stretches to fill its grid cell so the card inside it
+// can grow to match sibling cards in the same row.
+.projectGrid__item {
+  display: flex;
+}
+
+// ─── Empty state ──────────────────────────────────────────────────────────────
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-2xl 0;
+  text-align: center;
+  color: var(--color-subtext0);
+}
+
+.emptyState__text {
+  font-size: 0.9375rem;
+}

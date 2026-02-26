@@ -1,0 +1,128 @@
+// Nav — site-wide navigation bar.
+//
+// Layout:
+//   - Mobile: horizontal flex row, logo left, links right
+//   - The /services route is intentionally NOT included in the nav links.
+//     It is a hidden route accessible only by direct URL.
+//
+// Background uses --color-mantle (one step darker than the page --color-base)
+// to visually separate the nav from the content area without a heavy border.
+
+@use "../../styles/variables" as *;
+
+// ─── Nav bar ──────────────────────────────────────────────────────────────────
+
+.nav {
+  background-color: var(--color-mantle);
+  border-bottom: 1px solid var(--color-overlay0);
+  width: 100%;
+  // Ensure the nav stays above page content when scrolling
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+// ─── Inner container ──────────────────────────────────────────────────────────
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $space-md;
+  height: 56px;
+
+  @media (min-width: #{$bp-tablet}) {
+    padding: 0 $space-lg;
+    height: 64px;
+  }
+}
+
+// ─── Logo / brand ─────────────────────────────────────────────────────────────
+
+.nav__logo {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+
+  // Ensure the logo touch target meets WCAG 2.1 AA 44×44px
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: color 0.15s ease;
+  }
+
+  &:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: #{$radius-sm};
+  }
+}
+
+// ─── Link list ────────────────────────────────────────────────────────────────
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+// ─── Individual link ──────────────────────────────────────────────────────────
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 $space-sm;
+
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-subtext1);
+  text-decoration: none;
+  border-radius: #{$radius-sm};
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  &:hover {
+    color: var(--color-text);
+    background-color: var(--color-surface0);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// Active state — applied when the NavLink route is the current page.
+// Uses a slightly elevated color so the current page is obvious without
+// being garish. The bottom border acts as an underline indicator.
+.nav__link--active {
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-accent-lavender);
+    background-color: var(--color-surface0);
+  }
+}

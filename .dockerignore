@@ -1,0 +1,42 @@
+# Version control
+.git/
+.gitignore
+
+# Nix / direnv
+.direnv/
+flake.nix
+flake.lock
+result
+result-*
+
+# Dev tooling
+.pre-commit-config.yaml
+.dictionary.txt
+
+# Dependencies (reinstalled during build)
+node_modules/
+
+# Test artifacts
+e2e/
+coverage/
+playwright-report/
+test-results/
+
+# Documentation
+agent-docs/
+AGENTS.md
+README.md
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# CI
+.github/
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
+*.swp

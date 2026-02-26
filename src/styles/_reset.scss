@@ -1,0 +1,87 @@
+// CSS Reset — establishes a consistent cross-browser baseline.
+// Based on modern best practices: box-sizing border-box, sensible defaults,
+// no opinionated styling that would conflict with Catppuccin Mocha theming.
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // Prevent font size inflation on mobile after orientation change
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+
+  // Smooth scrolling — but only when the user hasn't opted out
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.5;
+  // Improve text rendering
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Make images and media behave like blocks and scale responsibly
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+// Inherit fonts for form elements — browsers set their own by default
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+// Remove built-in button chrome
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+// Avoid text overflow in paragraphs and headings
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// Remove list styles — semantic lists still use role="list" for screen readers
+ul,
+ol {
+  list-style: none;
+}
+
+// Reasonable defaults for interactive elements
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Make sure the root element fills the viewport for flex/grid layouts
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
