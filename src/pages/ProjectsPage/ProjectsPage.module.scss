@@ -1,4 +1,9 @@
-// ProjectsPage — displays a responsive grid of GitHub repository cards.
+// ProjectsPage — displays a featured contributions section and a responsive
+// grid of FredSystems GitHub repository cards.
+//
+// Sections:
+//   - Featured contributions: static cards for ACARS Hub and SDR-Enthusiasts
+//   - FredSystems: live-fetched org repos displayed in a responsive grid
 //
 // Layout (mobile-first):
 //   - Single column on mobile (320px+)
@@ -88,21 +93,137 @@
   color: var(--color-subtext0);
 }
 
-// Legacy alias kept for compatibility
-.page__status {
+// ─── Featured contributions ───────────────────────────────────────────────────
+
+.featured {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: $space-md;
-  padding: $space-2xl 0;
-  text-align: center;
 }
 
-.page__errorMessage {
+.featured__heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding-bottom: $space-sm;
+  border-bottom: 1px solid var(--color-overlay0);
+}
+
+.featured__intro {
   font-size: 0.9375rem;
+  color: var(--color-subtext0);
+  line-height: 1.5;
+}
+
+.featured__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+
+  @media (min-width: #{$bp-tablet}) {
+    flex-direction: row;
+  }
+}
+
+.featured__card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  padding: $space-md;
+
+  background-color: var(--color-surface0);
+  border: 1px solid var(--color-overlay0);
+  border-radius: #{$radius-md};
+  text-decoration: none;
+  color: inherit;
+
+  @media (min-width: #{$bp-tablet}) {
+    flex: 1;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition:
+      border-color 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-primary) 5%, var(--color-surface0));
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+.featured__cardHeader {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+.featured__icon {
+  height: 1.125em;
+  flex-shrink: 0;
+  color: var(--color-subtext0);
+}
+
+.featured__name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.featured__role {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  background-color: color-mix(in srgb, var(--color-primary) 12%, var(--color-surface0));
+  border-radius: #{$radius-sm};
+  padding: 0.125rem 0.4rem;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.featured__externalIcon {
+  height: 0.75em;
+  flex-shrink: 0;
+  opacity: 0.4;
+}
+
+.featured__description {
+  font-size: 0.875rem;
   color: var(--color-subtext1);
-  max-width: 50ch;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.featured__org {
+  font-size: 0.75rem;
+  color: var(--color-subtext0);
+  font-family: monospace;
+}
+
+// ─── Section heading (FredSystems) ────────────────────────────────────────────
+
+.section__heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding-bottom: $space-sm;
+  border-bottom: 1px solid var(--color-overlay0);
+}
+
+.section__subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-subtext0);
+  line-height: 1.5;
+  margin-top: -$space-sm;
 }
 
 // ─── Project grid ─────────────────────────────────────────────────────────────

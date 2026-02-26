@@ -80,6 +80,22 @@
   max-width: 65ch;
 }
 
+.bio__link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: var(--color-accent-lavender);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
 // ─── Links section ────────────────────────────────────────────────────────────
 
 .links {
@@ -167,4 +183,22 @@
   flex-shrink: 0;
   opacity: 0.5;
   margin-left: auto;
+}
+
+// ─── NixOS accent variant ─────────────────────────────────────────────────────
+//
+// The NixOS link gets a subtle teal/sky tint to echo the NixOS brand colour
+// without importing an external colour token that isn't in the Catppuccin
+// Mocha palette. --color-accent-teal is the closest match.
+
+.links__item--nixos {
+  &:hover {
+    color: var(--color-accent-teal);
+    border-color: var(--color-accent-teal);
+    background-color: color-mix(in srgb, var(--color-accent-teal) 8%, var(--color-surface0));
+  }
+
+  &:focus-visible {
+    outline-color: var(--color-accent-teal);
+  }
 }
