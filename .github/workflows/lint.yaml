@@ -21,7 +21,8 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Run flake pre-commit hooks
-        run: nix develop -c bash -c '
-          npm i
-          pre-commit run --all-files
-          `
+        run: |
+          nix develop -c bash -c '
+            npm i
+            pre-commit run --all-files
+          '
