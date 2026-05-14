@@ -33,7 +33,7 @@ jobs:
 
   deploy:
     name: Deploy
-    uses: sdr-enthusiasts/common-github-workflows/.github/workflows/sdre.yml@b74159859e761398e31593ee81fd411fd96d69fc # main
+    uses: sdr-enthusiasts/common-github-workflows/.github/workflows/sdre.yml@8ceaf9ed0e8f1b329f0df77e0e949a0a7faf7a58 # main
     permissions:
       id-token: "write"
       contents: "read"
