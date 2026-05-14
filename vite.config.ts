@@ -12,14 +12,9 @@ export default defineConfig({
     },
   },
 
-  css: {
-    preprocessorOptions: {
-      scss: {
-        // Use the modern Sass API to silence deprecation warnings
-        api: "modern-compiler",
-      },
-    },
-  },
+  // Vite 8+ uses the modern Sass compiler API by default; no scss
+  // preprocessorOptions are needed. The previous `api: "modern-compiler"`
+  // opt-in was removed from SassPreprocessorOptions in Vite 8.
 
   test: {
     globals: true,
