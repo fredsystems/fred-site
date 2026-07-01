@@ -22,7 +22,7 @@ COPY public/ ./public/
 RUN npm run build
 
 # Stage 2 — serve with nginx
-FROM nginx:alpine@sha256:feb6f75a08aa55b44576f98c15b8859819ecf54f3e4d2157f42c2d01cb58a3d2 AS serve
+FROM nginx:alpine@sha256:54f2a904c251d5a34adf545a72d32515a15e08418dae0266e23be2e18c66fefa AS serve
 
 # Copy the static build output
 COPY --from=build /app/dist /usr/share/nginx/html
