@@ -26,6 +26,28 @@
       "matchManagers": ["github-actions", "nix"],
       "matchUpdateTypes": ["major", "minor", "patch", "pin"],
       "automerge": true
+    },
+    {
+      "groupName": "react ecosystem",
+      "matchManagers": ["npm"],
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "react-router",
+        "@types/react",
+        "@types/react-dom",
+        "@vitejs/plugin-react"
+      ]
+    },
+    {
+      "groupName": "playwright",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@playwright/test", "@axe-core/playwright"]
+    },
+    {
+      "groupName": "vitest",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["vitest", "@vitest/coverage-v8"]
     }
   ]
 }

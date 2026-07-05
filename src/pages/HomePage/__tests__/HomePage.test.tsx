@@ -19,8 +19,7 @@ describe("HomePage", () => {
 
   it("renders a tagline / role description", () => {
     renderHomePage();
-    // Use exact match to avoid matching the bio text which also mentions "software engineer"
-    expect(screen.getByText("Software Engineer")).toBeInTheDocument();
+    expect(screen.getByText("Open source contributor")).toBeInTheDocument();
   });
 
   it("renders the About Me section heading", () => {
@@ -30,8 +29,9 @@ describe("HomePage", () => {
 
   it("renders bio text content", () => {
     renderHomePage();
-    // Bio section should contain some descriptive text
-    expect(screen.getByText(/open source/i)).toBeInTheDocument();
+    // Bio section should contain some descriptive text. Match a phrase that
+    // lives within a single text node (the prose is split by inline links).
+    expect(screen.getByText(/passionate hobbyist and self-taught developer/i)).toBeInTheDocument();
   });
 
   it("renders the Find Me Online section heading", () => {

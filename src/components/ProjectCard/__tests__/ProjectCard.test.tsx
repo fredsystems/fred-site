@@ -22,8 +22,10 @@ describe("ProjectCard", () => {
 
   it("renders the project description", () => {
     render(<ProjectCard project={mockProject} />);
+    // The description is rendered with a leading " — " separator inside the
+    // same span as the project name, so match on the substring.
     expect(
-      screen.getByText("My personal website built with React and TypeScript"),
+      screen.getByText(/My personal website built with React and TypeScript/),
     ).toBeInTheDocument();
   });
 
