@@ -194,13 +194,13 @@ describe("ProjectsPage", () => {
     await waitFor(() => {
       expect(screen.queryByRole("status")).not.toBeInTheDocument();
     });
-    expect(screen.queryByRole("list", { name: /github projects/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole("list", { name: /fredsystems projects/i })).not.toBeInTheDocument();
   });
 
   it("renders the project list with accessible label", async () => {
     renderProjectsPage();
     await waitFor(() => {
-      expect(screen.getByRole("list", { name: /github projects/i })).toBeInTheDocument();
+      expect(screen.getByRole("list", { name: /fredsystems projects/i })).toBeInTheDocument();
     });
   });
 });
