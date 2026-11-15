@@ -24,16 +24,12 @@ jobs:
       - name: Log dispatch reason
         env:
           INPUTS_REASON: ${{ github.event.inputs.reason }}
-          INPUTS_USE_TEST_IMAGE: ${{ github.event.inputs.use_test_image }}
-          INPUTS_BUILD_LATEST_AS_TEST: ${{ github.event.inputs.build_latest_as_test }}
         run: |
           echo "Workflow dispatch reason: $INPUTS_REASON"
-          echo "Use test image: $INPUTS_USE_TEST_IMAGE"
-          echo "Build latest as test: $INPUTS_BUILD_LATEST_AS_TEST"
 
   deploy:
     name: Deploy
-    uses: sdr-enthusiasts/common-github-workflows/.github/workflows/sdre.yml@4cf063e5906338b3b92f0fe71d8dbae52c180d99 # main
+    uses: sdr-enthusiasts/common-github-workflows/.github/workflows/sdre.yml@2c6ff7fabb49cc277aa6dbe4cca0fe3be63a21b0 # main
     permissions:
       id-token: "write"
       contents: "read"
